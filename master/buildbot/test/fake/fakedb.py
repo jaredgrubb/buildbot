@@ -23,6 +23,7 @@ import base64
 from buildbot.util import json, datetime2epoch
 from twisted.internet import defer, reactor
 from buildbot.db import buildrequests
+from copy import deepcopy
 
 # Fake DB Rows
 
@@ -853,10 +854,17 @@ class FakeBuildslavesComponent(FakeDBComponent):
                 })
 
     def getBuildslaves(self):
-        return defer.succeed([ ])
+        return defer.succeed([{
+                    'name':    s['name'],
+                    'slaveid': s['slaveid'],
+        } for s in self.buildslaves])
 
     def getBuildslaveByName(self, name):
-        return defer.succeed(self._getBuildslaveByName(name))
+        buildslave = self._getBuildslaveByName(name)
+        if buildslave is not None:
+            # XX: make a deep-copy to avoid side effects
+            buildslave = deepcopy(buildslave)
+        return defer.succeed(buildslave)
 
     def _getBuildslaveByName(self, name):
         for slave in self.buildslaves:
@@ -865,6 +873,7 @@ class FakeBuildslavesComponent(FakeDBComponent):
         return None
 
     def updateBuildslave(self, name, slaveinfo):
+        slaveinfo = deepcopy(slaveinfo)
         slave = self._getBuildslaveByName(name)
         if slave is None:
             self.insertTestData([
