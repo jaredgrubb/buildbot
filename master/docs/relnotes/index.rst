@@ -217,67 +217,67 @@ Fixes
 
 * Whitespace is properly handled for StringParameter, so that appropriate validation errors are raised for ``required`` parameters (:bb:pull:`1084`).
 
-* Fix a rare case where a buildtep might fail from a GeneratorExit exception (:bb:pull:`1063`).
+* Fixed a rare case where a build step might fail from a GeneratorExit exception (:bb:pull:`1063`).
 
 * Fixed an issue where UTF-8 data in logs caused RSS feed exceptions (:bb:bug:`951`).
 
-* Fix an issue with unescaped author names causing invalid RSS feeds (:bb:bug:`2596`).
+* Fixed an issue with unescaped author names causing invalid RSS feeds (:bb:bug:`2596`).
 
 * Fixed an issue with pubDate format in feeds.
 
 * Fixed an issue where the step text value could cause a ``TypeError`` in the build detail page (:bb:pull:`1061`).
 
-* Fix failures where ``git clean`` fails but could be clobbered (:bb:pull:`1058`).
+* Fixed failures where ``git clean`` fails but could be clobbered (:bb:pull:`1058`).
 
 * Build step now correctly fails when the git clone step fails (:bb:pull:`1057`).
 
 * Fixed a race condition in slave shutdown (:bb:pull:`1019`).
 
-* Now correctly unsubscribes StatusPush from status updates when reconfiguring (:bb:pull:`997`).
+* StatusPush is correctly unsubscribed from status updates when reconfiguring (:bb:pull:`997`).
 
-* Fixes parsing git commit messages that are blank.
+* Fixed parsing git commit messages that are blank.
 
 * :bb:step:`Git` no longer fails when work dir exists but isn't a checkout (:bb:bug:`2531`).
 
-* The `haltOnFailure` and `flunkOnFailure` attricutes of :bb:step:`ShellCommand` are now renderable. (:bb:bug `2486`).
+* The `haltOnFailure` and `flunkOnFailure` attributes of :bb:step:`ShellCommand` are now renderable. (:bb:bug `2486`).
 
 * The `rotateLength` and `maxRotatedFile` arguments are no longer treated as strings in buildbot.tac. This fixes log rotation.
 
-* Builbot no longer specifies a revision when pulling from a mercurial (:bb:bug:`438`).
+* Builbot no longer specifies a revision when pulling from a Mercurial repo (:bb:bug:`438`).
 
 * The WebStatus no longer incorrectly refers to fields that might not be visible.
 
 * The GerritChangeSource now sets a default author, fixing an exception that occured when Gerrit didn't report an owner name/email.
 
-* Respects the ``RETRY`` status when an interrupt occurs.
+* The ``RETRY`` status is respected when an interrupt occurs.
 
-* Fixes an off-by-one error when the tryclient is finding the current git branch.
+* Fixed an off-by-one error when the tryclient is finding the current git branch.
 
-* Improve the Mercurial source stamp extraction in the try client.
+* Improved the Mercurial source stamp extraction in the try client.
 
-* Fixes some edge cases in timezone handling for python < ``2.7.4`` (:bb:bug:`2522`).
+* Fixed some edge cases in timezone handling for python < ``2.7.4`` (:bb:bug:`2522`).
 
 * The ``EC2LatentBuildSlave`` will now only consider available AMI's.
 
-* Fixes a case where the first build runs on an old slave instead of a new one after reconfig (:bb:bug:`2507`).
+* Fixed a case where the first build runs on an old slave instead of a new one after reconfig (:bb:bug:`2507`).
 
 * The e-mail address validation for the MailNotifier status receiver has been improved.
 
 * The ``--db`` parameter of ``buildbot create-master`` is now validated.
 
-* No longer ignores default choice for ForceScheduler list parameters
+* The default choice for ForceScheduler no longer ignores list parameters.
 
-* Now correctly handles ``BuilderConfig(..., mergeRequests=False)`` (:bb:bug:`2555`).
+* ``BuilderConfig(..., mergeRequests=False)`` is now correctly handled (:bb:bug:`2555`).
 
-* Now excludes changes from sourcestamps when they aren't in the DB (:bb:bug:`2554`).
+* Changes from sourcestamps are excluded when they aren't in the DB (:bb:bug:`2554`).
 
-* Fixes a compatibility issue with HPCloud in the OpenStack latent slave.
+* Fixed a compatibility issue with HPCloud in the OpenStack latent slave.
 
 * Allow ``_`` as a valid character in JSONP callback names.
 
-* Fix build start time retrieval in the WebStatus grid view.
+* Fixed build start time retrieval in the WebStatus grid view.
 
-* Increase the length of the DB fields ``changes.comments`` and ``buildset_properties.property_value``.
+* Increased the length of the DB fields ``changes.comments`` and ``buildset_properties.property_value``.
 
 
 Deprecations, Removals, and Non-Compatible Changes
@@ -335,7 +335,7 @@ Features
 Fixes
 ~~~~~
 
-* Fixed an issue when buildstep stop() was raising an exception incorrectly if timeout for
+* Fixed an issue when ``BuildStep.stop()`` was raising an exception incorrectly if timeout for
   buildstep wasn't set or was None (see :bb:pull:`753`) thus keeping watched logfiles open
   (this prevented their removal on Windows in subsequent builds).
 
@@ -372,3 +372,4 @@ Newer versions are also available here:
     0.8.8
     0.8.7
     0.8.6
+
